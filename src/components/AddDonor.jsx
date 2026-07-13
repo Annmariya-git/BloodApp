@@ -1,7 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavDonors from './NavDonors'
+import axios from 'axios'
 
 const AddDonor = () => {
+    const[input,changeInput]=useState(
+        {  donor_name: "",  
+            age: "",  
+            gender: "",  
+            blood_group: "",  
+            phone: "",  
+            email: "",  
+            city: "",  
+            weight_kg: "",  
+            last_donation_date: ""
+        })
+
+        const inputHandler = event =>{
+            changeInput({...input,[event.target.name]:event.target.value})
+         }
+
+         const readvalue=()=>{
+
+         console.log(input)
+         axios.post("https://host-demo-app.onrender.com/api/add-donor",input).then(
+
+         (response)=>{
+
+         console.log(response.data)
+         }
+ ).catch() 
+ }
+
   return (
     <div>
         <NavDonors />
@@ -11,15 +40,15 @@ const AddDonor = () => {
                     <div className="row">
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">Donor Name</label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" name="donor_name" value={input.donor_name} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">Age</label>
-                            <input type="number" className="form-control" />
+                            <input type="number" className="form-control" name="age" value={input.age} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                            <label htmlFor="" className="form-label">gender</label>
-                            <select name="" id="" className="form-control">
+                            <label htmlFor="" className="form-label">Gender</label>
+                            <select name="" id="" className="form-control" name="gender" value={input.gender} onChange={inputHandler}>
                                 <option value="">Male</option>
                                 <option value="">Female</option>
                                 <option value="">other</option>
@@ -28,7 +57,7 @@ const AddDonor = () => {
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">BloodGroup</label>
-                            <select name="" id="" className="form-control">
+                            <select name="" id="" className="form-control" name="blood_group" value={input.blood_group} onChange={inputHandler}>
                                 <option value="">A+</option>
                                 <option value="">A-</option>
                                 <option value="">B+</option>
@@ -41,26 +70,26 @@ const AddDonor = () => {
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">Phone</label>
-                            <input type="num" className="form-control" />
+                            <input type="num" className="form-control" name="phone" value={input.phone} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">Email</label>
-                            <input type="email" className="form-control" />
+                            <input type="email" className="form-control" name="email" value={input.email} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">City</label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" name="city" value={input.city} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">Weight-kg</label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" name="weight_kg" value={input.weight_kg} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">last-dontion-date</label>
-                            <input type="date" name="" id="" className="form-control" />
+                            <input type="date" name="" id="" className="form-control" name="last_donation_date" value={input.last_donation_date} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                            <button className="btn btn-success">Submit</button>
+                            <button className="btn btn-success" onClick={readvalue}>Submit</button>
                         </div>
                     </div>
                 </div>
