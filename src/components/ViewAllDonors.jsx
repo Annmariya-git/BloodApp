@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import NavDonors from "./NavDonors";
 
 
 
@@ -22,7 +23,7 @@ const ViewAllDonors = () => {
        
     return (
         <div>
-           
+           <NavDonors />
             <div className="container mt-4">
                 <div className="row g-4">
                     {data.map(
